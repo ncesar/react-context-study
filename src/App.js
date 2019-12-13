@@ -6,15 +6,15 @@ import Second from './pages/Second';
 import { UserContext } from './UserContext';
 
 function App() {
-  const [value, setValue] = useState('hello from context xD');
-  const providerValue = useMemo(
+  const [user, setUser] = useState(null);
+  const context = useMemo(
     () => ({
-      value,
-      setValue,
+      user,
+      setUser,
     }),
     [
-      value,
-      setValue,
+      user,
+      setUser,
     ] /* isso previne que o value/setVAlue seja renderizado direto, mesmo quando ele
     nao foi alterado. Ele só vai realmente renderizar quando houver alguma mudança dos dois. */,
   );
@@ -26,7 +26,7 @@ function App() {
         <br />
         <Link to="/second">Second</Link>
       </div>
-      <UserContext.Provider value={providerValue}>
+      <UserContext.Provider value={context}>
         {/*no value passamos a info que queremos distribuir
         Todos consumidores que são descendentes de um Provider 
         serão renderizados novamente sempre que a prop value do Provider for alterada.
